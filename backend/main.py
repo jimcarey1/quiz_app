@@ -12,7 +12,9 @@ cors_config = CORSConfig(
     allow_credentials=True
 )
 
-allowed_hosts = AllowedHostsConfig(['localhost', '127.0.0.1'])
+allowed_hosts = AllowedHostsConfig(
+    allowed_hosts=['localhost', '127.0.0.1', 'localhost:8000', '127.0.0.1:8000']
+)
 
 app = Litestar(
     route_handlers=[UserController],
