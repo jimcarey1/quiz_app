@@ -4,8 +4,9 @@ from base64 import urlsafe_b64encode
 import httpx
 import jwt
 from jwt import PyJWKClient
+from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
 from litestar.security.jwt.token import Token
-from typing import Any
+from typing import Any, Optional
 from datetime import datetime, timedelta, timezone, date
 
 from settings import *
@@ -77,3 +78,10 @@ def serialize_datetime_fields(data: dict) -> dict:
         if isinstance(value, (datetime, date)):
             data[key] = value.isoformat()
     return data
+
+def is_token_valid(token:str)->Optional[dict[str, Any]]:
+    try:
+        payload = jwt.decode(token, key=JWT_SECRET_TOKEN, algorithms=['HS256'], verify=True)
+        return payload
+    except (ExpiredSignatureError, InvalidTokenError):
+        return None

@@ -2,6 +2,7 @@ from litestar import Controller, post, get, Request
 from litestar.response import Redirect, Response
 from litestar.datastructures import Cookie
 from litestar.params import Parameter
+from litestar.exceptions import NotAuthorizedException
 from urllib.parse import urlencode
 from typing import Any, Annotated
 import json
@@ -9,7 +10,7 @@ import json
 from users.schema import UserDTO
 from users.tables import User, AuthTokens
 from settings import GOOGLE_CLIENT_ID, GOOGLE_OAUTH_START_URL, GOOGLE_REDIRECT_URI, ACCESS_TOKEN_LIFETIME, REFRESH_TOKEN_LIFETIME
-from users.security import generate_secret_token, generate_code_challenge, exchange_code_for_tokens, decode_google_id_token, create_access_token, create_refresh_token, serialize_datetime_fields
+from users.security import generate_secret_token, generate_code_challenge, exchange_code_for_tokens, decode_google_id_token, create_access_token, create_refresh_token, serialize_datetime_fields, is_token_valid
 
 class UserController(Controller):
     path = '/accounts'
@@ -35,7 +36,7 @@ class UserController(Controller):
         except KeyError:
             pass
         #then delete that particular item from the filestore.
-        file_store.delete(oauth_verifier_cookie)
+        await file_store.delete(oauth_verifier_cookie)
         id_token = response_data['id_token']
         access_token = response_data['access_token']
         refresh_token = response_data['refresh_token']
@@ -96,4 +97,20 @@ class UserController(Controller):
         oauth_cookie = Cookie(key='oauth_verifier', value=random_string, max_age=300, httponly=True, secure=False)
         redirect_response = Redirect(redirect_url, cookies=(oauth_cookie,))
         return redirect_response
+    
+    @post('/refresh')
+    async def refresh_tokens(self, request:Request[Any, Any, Any])->Response:
+        refresh_token = request.cookies.get('refresh_token')
+        if (payload:=is_token_valid(refresh_token)) and (not payload):
+            return NotAuthorizedException(detail='User not authenticated', status_code=401)
+        user_sub = payload.get('sub')
+        access_token = create_access_token(ACCESS_TOKEN_LIFETIME, user_sub)
+        user = await User.objects().get(User.sub == user_sub)
+        if not user:
+            return NotAuthorizedException
+        access_cookie = Cookie('access_token', value=access_token, max_age=ACCESS_TOKEN_LIFETIME, secure=False, httponly=False)
+        user_cookie = Cookie('auth_user', value=json.dumps(serialize_datetime_fields(user.to_dict())), max_age=ACCESS_TOKEN_LIFETIME, secure=False, httponly=False)
+        response = Response(content={}, cookies=(access_cookie, user_cookie), status_code=200)
+        return response    
+
         
