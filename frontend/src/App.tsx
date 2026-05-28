@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router";
 
 import HomePage from "./pages/HomePage";
+import JoinPage from "./pages/JoinPage";
 
 async function fetchAuthTokens(){
   await fetch('http://localhost:8000/accounts/refresh', {
@@ -31,6 +32,7 @@ export default function App(){
     <React.Fragment>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/join" element={<JoinPage />} />
       </Routes>
     </React.Fragment>
   )
