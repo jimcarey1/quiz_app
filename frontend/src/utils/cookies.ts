@@ -1,3 +1,5 @@
+import type { User } from "../types/user"
+
 function getCookie(name: string):string|null{
     const cookies = document.cookie.split('; ')
     for (const cookie of cookies){
@@ -16,9 +18,10 @@ export function populateAccessToken(){
 }
 
 export function populateAuthUser(){
-    let authUser = getCookie('auth_user')
-    if(authUser){
-        authUser = authUser.replace("\\054", ",")
+    let authUserCookie = getCookie('auth_user')
+    if(authUserCookie !== null){
+        authUserCookie = authUserCookie.replaceAll("\\054", ",")
+        const authUser: User = JSON.parse(JSON.parse(authUserCookie))
         return authUser
     }
     return null

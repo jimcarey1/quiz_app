@@ -1,12 +1,13 @@
 import React from "react";
 
 import { populateAccessToken, populateAuthUser } from "../utils/cookies";
+import type { User } from "../types/user";
 
 const AuthContext = React.createContext(null)
 
 export default function AuthProvider({children}: {children:React.ReactNode}){
-    const [user, setUser] = React.useState<string|null>(populateAccessToken())
-    const [accessToken, setAccessToken] = React.useState<string|null>(populateAuthUser())
+    const [user, _] = React.useState<User|null>(populateAuthUser())
+    const [accessToken, __] = React.useState<string|null>(populateAccessToken())
 
     async function logout(){
         await cookieStore.delete('auth_user')
