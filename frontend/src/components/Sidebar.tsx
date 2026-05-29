@@ -5,9 +5,15 @@ import { GrPieChart } from "react-icons/gr";
 
 import { ProgressBar } from "./ui/ProgressBar";
 
-export default function Sidebar(){
+type SidebarProps = {
+    className?: string;
+    bordered?: boolean;
+    fullWidth?: boolean;
+}
+
+export default function Sidebar({ className="", bordered=true, fullWidth=false }: SidebarProps){
     return (
-        <aside className='flex flex-col items-center gap-4 w-50 h-screen bg-gray-100 text-white p-4'>
+        <aside className={`flex flex-col h-screen ${fullWidth ? 'w-full max-w-none' : 'w-full max-w-[200px]'} items-center gap-4 bg-gray-100 text-white p-4 ${bordered ? 'border-r border-slate-200' : ''} ${className}`}>
             <h2 className='text-2xl text-purple-600 font-bold'>Quiz App</h2>
             <nav className="flex-1 flex w-full items-center text-black">
                 <div className="flex flex-col w-full h-full">

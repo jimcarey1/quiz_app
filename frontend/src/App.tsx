@@ -4,6 +4,8 @@ import { Routes, Route } from "react-router";
 import HomePage from "./pages/HomePage";
 import JoinPage from "./pages/JoinPage";
 import AdminPage from "./pages/AdminPage";
+import LibraryPage from "./pages/LibraryPage";
+import SessionPage from "./pages/SessionPage";
 
 async function fetchAuthTokens(){
   await fetch('http://localhost:8000/accounts/refresh', {
@@ -35,6 +37,8 @@ export default function App(){
         <Route path="/" element={<HomePage />} />
         <Route path="/join" element={<JoinPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/library" element={<LibraryPage />} />
+        <Route path="/admin/reports" element={<SessionPage />} />
       </Routes>
     </React.Fragment>
   )
