@@ -11,6 +11,3 @@ class UserStruct(Struct):
     picture: str
     created_at: datetime
     updated_at: datetime
-
-class UserDTO(MsgspecDTO[UserStruct]):...
-

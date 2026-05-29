@@ -3,14 +3,34 @@ from litestar.response import Redirect, Response
 from litestar.datastructures import Cookie
 from litestar.params import Parameter
 from litestar.exceptions import NotAuthorizedException
+from litestar.connection import ASGIConnection
+from litestar.security.jwt.token import Token
+from litestar.security.jwt import JWTAuth
 from urllib.parse import urlencode
 from typing import Any, Annotated
 import json
 
-from users.schema import UserDTO
+from users.middleware import MyCustomJWTAuthenticationMiddleware
+from users.schema import UserStruct
 from users.tables import User, AuthTokens
-from settings import GOOGLE_CLIENT_ID, GOOGLE_OAUTH_START_URL, GOOGLE_REDIRECT_URI, ACCESS_TOKEN_LIFETIME, REFRESH_TOKEN_LIFETIME
+from settings import GOOGLE_CLIENT_ID, GOOGLE_OAUTH_START_URL, GOOGLE_REDIRECT_URI, ACCESS_TOKEN_LIFETIME, REFRESH_TOKEN_LIFETIME, JWT_SECRET_TOKEN
 from users.security import generate_secret_token, generate_code_challenge, exchange_code_for_tokens, decode_google_id_token, create_access_token, create_refresh_token, serialize_datetime_fields, is_token_valid
+
+async def retrieve_user_handler(token: Token, connection: ASGIConnection[Any, Any, Any, Any]) -> UserStruct | None:
+    user_sub = token.get('sub')
+    user = await User.objects().get(User.sub == user_sub)
+    if user:
+        return UserStruct(**user.to_dict())
+    return None
+
+jwt_auth = JWTAuth[User](
+    retrieve_user_handler=retrieve_user_handler,
+    token_secret= JWT_SECRET_TOKEN,
+    # we are specifying which endpoints should be excluded from authentication. In this case the login endpoint
+    # and our openAPI docs.
+    exclude=["/accounts/google/callback", "/accounts/google/start", "/schema"],
+    authentication_middleware_class=MyCustomJWTAuthenticationMiddleware
+)
 
 class UserController(Controller):
     path = '/accounts'
