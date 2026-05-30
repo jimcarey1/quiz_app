@@ -6,6 +6,9 @@ import JoinPage from "./pages/JoinPage";
 import AdminPage from "./pages/AdminPage";
 import LibraryPage from "./pages/LibraryPage";
 import SessionPage from "./pages/SessionPage";
+import QuizBuilderPage from "./pages/QuizEdit";
+import CreateQuestionPage from "./pages/AddQuestion";
+import ActivityPreviewPage from "./pages/QuizDetailPage";
 
 async function fetchAuthTokens(){
   await fetch('http://localhost:8000/accounts/refresh', {
@@ -39,6 +42,9 @@ export default function App(){
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/admin/library" element={<LibraryPage />} />
         <Route path="/admin/reports" element={<SessionPage />} />
+        <Route path="/admin/quiz-builder" element={<QuizBuilderPage />} />
+        <Route path="/admin/create-question" element={<CreateQuestionPage />} />
+        <Route path="/admin/quiz/detail" element={<ActivityPreviewPage />} />
       </Routes>
     </React.Fragment>
   )

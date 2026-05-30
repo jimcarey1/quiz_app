@@ -6,7 +6,7 @@ import React from 'react'
 
 export default function JoinPage(){
     const [joinCode, setJoinCode] = React.useState('')
-    function handleJoinQuiz(formData: FormData){
+    function handleJoinQuiz(_formData: FormData){
         //TODO: Implement the logic to join the quiz using the join code
         // For now, we will just log the join code to the console
         console.log('Joining quiz with code:', joinCode)
@@ -15,8 +15,8 @@ export default function JoinPage(){
     return (
         <main className='min-h-screen flex flex-col'>
             <JoinNavbar />
-            <section className='flex-1 flex flex-col items-center justify-center gap-4 p-4'>
-                <h1 className='text-2xl font-bold'>Welcome to the Quiz App</h1>
+            <section className='flex flex-1 flex-col items-center justify-center gap-4 bg-white p-4 text-gray-900 dark:bg-black dark:text-white'>
+                <h1 className='text-xl font-bold'>Welcome to the Quiz App</h1>
                 <div className='flex flex-col items-center gap-2'>
                     <Form className='flex flex-col gap-1' action={handleJoinQuiz}>
                         <TextField

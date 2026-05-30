@@ -14,6 +14,7 @@ import {
   ChevronDown,
   Library,
 } from "lucide-react"
+import { Button, Input } from "react-aria-components"
 
 export default function LibraryPage() {
   return (
@@ -32,9 +33,12 @@ export default function LibraryPage() {
         </nav>
 
         <div className="mb-6 flex flex-col items-center gap-6">
-          <button className="grid size-11 place-items-center rounded-lg bg-yellow-400">
+          <Button
+            aria-label="Upgrade"
+            className="grid size-11 place-items-center rounded-lg bg-yellow-400"
+          >
             <Crown size={22} fill="black" />
-          </button>
+          </Button>
 
           <div className="grid size-14 place-items-center rounded-full bg-teal-700 text-white">
             :)
@@ -89,7 +93,8 @@ export default function LibraryPage() {
         <header className="sticky top-0 z-30 border-b border-zinc-200 bg-white px-5 py-4 lg:px-6">
           <div className="flex items-center gap-3 rounded-full border border-zinc-300 px-5 py-3">
             <Search size={22} />
-            <input
+            <Input
+              aria-label="Search by activity name"
               placeholder="Search by activity name"
               className="w-full bg-transparent text-base outline-none placeholder:text-zinc-400"
             />
@@ -101,33 +106,33 @@ export default function LibraryPage() {
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <h1 className="text-3xl font-bold">Created by me</h1>
 
-            <button className="hidden items-center gap-2 rounded-lg bg-fuchsia-700 px-6 py-3 text-lg font-bold text-white lg:flex">
+            <Button className="hidden items-center gap-2 rounded-lg bg-fuchsia-700 px-6 py-3 text-lg font-bold text-white lg:flex">
               <Plus size={22} />
               Add resource
               <ChevronDown size={20} />
-            </button>
+            </Button>
           </div>
 
           {/* Tabs and Filter */}
           <div className="mt-12 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap items-center gap-5">
-              <button className="rounded-full bg-white px-6 py-4 text-xl font-bold shadow-md ring-1 ring-zinc-200">
+              <Button className="rounded-full bg-white px-6 py-4 text-xl font-bold shadow-md ring-1 ring-zinc-200">
                 Created (0/20)
-              </button>
+              </Button>
 
-              <button className="px-2 py-4 text-xl font-bold text-zinc-500">
+              <Button className="px-2 py-4 text-xl font-bold text-zinc-500">
                 Draft (0)
-              </button>
+              </Button>
 
-              <button className="px-2 py-4 text-xl font-bold text-zinc-500">
+              <Button className="px-2 py-4 text-xl font-bold text-zinc-500">
                 Archived (0)
-              </button>
+              </Button>
             </div>
 
-            <button className="hidden items-center gap-2 rounded-lg border border-zinc-300 px-6 py-4 text-lg font-bold lg:flex">
+            <Button className="hidden items-center gap-2 rounded-lg border border-zinc-300 px-6 py-4 text-lg font-bold lg:flex">
               Activity type
               <ChevronDown size={20} />
-            </button>
+            </Button>
           </div>
 
           {/* Empty State */}
@@ -138,16 +143,17 @@ export default function LibraryPage() {
 
             <div className="mt-10 flex w-full items-center gap-4 rounded-full border border-zinc-300 px-6 py-4">
               <Search size={24} />
-              <input
+              <Input
+                aria-label="Search for an activity"
                 placeholder="Search for an activity"
                 className="w-full bg-transparent text-lg outline-none placeholder:text-zinc-400"
               />
             </div>
 
-            <button className="mt-8 flex items-center gap-2 rounded-lg bg-fuchsia-700 px-6 py-3 text-lg font-bold text-white lg:hidden">
+            <Button className="mt-8 flex items-center gap-2 rounded-lg bg-fuchsia-700 px-6 py-3 text-lg font-bold text-white lg:hidden">
               <Plus size={22} />
               Add resource
-            </button>
+            </Button>
           </div>
         </section>
       </main>
@@ -168,7 +174,7 @@ function RailItem({
   active?: boolean
 }) {
   return (
-    <button className="flex flex-col items-center gap-2 text-sm">
+    <Button className="flex flex-col items-center gap-2 text-sm">
       <div
         className={[
           "grid size-14 place-items-center rounded-2xl",
@@ -188,7 +194,7 @@ function RailItem({
       >
         {label}
       </span>
-    </button>
+    </Button>
   )
 }
 
@@ -204,7 +210,7 @@ function LibrarySidebarItem({
   active?: boolean
 }) {
   return (
-    <button className="flex w-full items-center justify-between text-left">
+    <Button className="flex w-full items-center justify-between text-left">
       <div className="flex items-center gap-5">
         <span className={active ? "text-zinc-900" : "text-zinc-600"}>
           {icon}
@@ -221,7 +227,7 @@ function LibrarySidebarItem({
       </div>
 
       {count && <span className="text-lg text-zinc-600">{count}</span>}
-    </button>
+    </Button>
   )
 }
 
@@ -248,7 +254,7 @@ function MobileNavItem({
   activeDot?: boolean
 }) {
   return (
-    <button
+    <Button
       className={[
         "flex flex-col items-center gap-1 text-sm font-semibold",
         active ? "text-fuchsia-900" : "text-zinc-500",
@@ -263,6 +269,6 @@ function MobileNavItem({
         {icon}
       </div>
       <span>{label}</span>
-    </button>
+    </Button>
   )
 }

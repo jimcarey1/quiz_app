@@ -3,7 +3,14 @@ import React from "react";
 import { populateAccessToken, populateAuthUser } from "../utils/cookies";
 import type { User } from "../types/user";
 
-const AuthContext = React.createContext(null)
+type AuthContextValue = {
+    accessToken: string | null;
+    user: User | null;
+    logout: () => Promise<void>;
+    isAuthenticated: boolean;
+}
+
+const AuthContext = React.createContext<AuthContextValue | null>(null)
 
 export default function AuthProvider({children}: {children:React.ReactNode}){
     const [user, _] = React.useState<User|null>(populateAuthUser())
@@ -25,7 +32,7 @@ export default function AuthProvider({children}: {children:React.ReactNode}){
 
 export function useAuth(){
     const context = React.useContext(AuthContext)
-    if(context === undefined){
+    if(context === null){
         throw Error('You should wrap your react component inside your AuthContext')
     }
     return context

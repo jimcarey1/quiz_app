@@ -1,1 +1,246 @@
 @import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --app-bg: #ffffff;
+  --app-surface: #ffffff;
+  --app-muted: #f7fdf9;
+  --app-border: #a7f3d0;
+  --app-text: #111827;
+  --app-text-muted: #4b5563;
+  --app-green: #16a34a;
+  --app-green-strong: #15803d;
+  --app-green-soft: #dcfce7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --app-bg: #000000;
+    --app-surface: #000000;
+    --app-muted: #03140a;
+    --app-border: #166534;
+    --app-text: #f8fff9;
+    --app-text-muted: #c7f9d4;
+    --app-green: #22c55e;
+    --app-green-strong: #4ade80;
+    --app-green-soft: #052e16;
+  }
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  background: var(--app-bg);
+  color: var(--app-text);
+  font-size: 14px;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  color: var(--app-text) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: color-mix(in srgb, var(--app-text-muted) 68%, transparent) !important;
+}
+
+/* Keep the visual system simple: white in light mode, black in dark mode. */
+.bg-white,
+.bg-gray-50,
+.bg-gray-100,
+.bg-zinc-50,
+.bg-zinc-100,
+.bg-neutral-50,
+.bg-neutral-100,
+[class*="bg-[#e5e5e5]"] {
+  background-color: var(--app-surface) !important;
+}
+
+.bg-gray-200,
+.bg-zinc-200,
+.bg-neutral-200 {
+  background-color: var(--app-muted) !important;
+}
+
+[class*="border-gray-"],
+[class*="border-zinc-"],
+[class*="border-neutral-"],
+[class*="ring-gray-"],
+[class*="ring-zinc-"],
+[class*="ring-neutral-"] {
+  border-color: var(--app-border) !important;
+  --tw-ring-color: var(--app-border) !important;
+}
+
+/* Convert the previous colorful accents to one green accent family. */
+[class*="bg-pink-"],
+[class*="bg-fuchsia-"],
+[class*="bg-purple-"],
+[class*="bg-blue-"],
+[class*="bg-yellow-"],
+[class*="bg-rose-"],
+[class*="bg-teal-"],
+[class*="bg-orange-"],
+[class*="bg-red-"],
+[class*="bg-emerald-"],
+[class*="bg-[#4b1554]"],
+[class*="bg-[#2a0d31]"],
+[class*="bg-[#26102d]"] {
+  background-color: var(--app-green) !important;
+}
+
+[class*="bg-pink-50"],
+[class*="bg-fuchsia-50"],
+[class*="bg-purple-50"],
+[class*="bg-blue-50"],
+[class*="bg-yellow-50"],
+[class*="bg-rose-50"],
+[class*="bg-teal-50"],
+[class*="bg-orange-50"],
+[class*="bg-red-50"],
+[class*="bg-emerald-50"],
+[class*="bg-pink-100"],
+[class*="bg-pink-200"] {
+  background-color: var(--app-green-soft) !important;
+}
+
+[class*="text-pink-"],
+[class*="text-fuchsia-"],
+[class*="text-purple-"],
+[class*="text-blue-"],
+[class*="text-yellow-"],
+[class*="text-rose-"],
+[class*="text-teal-"],
+[class*="text-orange-"],
+[class*="text-red-"],
+[class*="text-emerald-"] {
+  color: var(--app-green-strong) !important;
+}
+
+[class*="border-pink-"],
+[class*="border-fuchsia-"],
+[class*="border-purple-"],
+[class*="border-blue-"],
+[class*="border-yellow-"],
+[class*="border-rose-"],
+[class*="border-teal-"],
+[class*="border-orange-"],
+[class*="border-red-"],
+[class*="border-emerald-"] {
+  border-color: var(--app-green) !important;
+}
+
+button[class*="bg-white"],
+button[class*="bg-gray-"],
+button[class*="bg-zinc-"],
+button[class*="bg-neutral-"],
+a[class*="bg-white"],
+a[class*="bg-gray-"],
+a[class*="bg-zinc-"],
+a[class*="bg-neutral-"] {
+  color: var(--app-green-strong) !important;
+  border-color: var(--app-green) !important;
+}
+
+button[class*="bg-pink-"],
+button[class*="bg-fuchsia-"],
+button[class*="bg-purple-"],
+button[class*="bg-blue-"],
+button[class*="bg-yellow-"],
+button[class*="bg-rose-"],
+button[class*="bg-teal-"],
+button[class*="bg-orange-"],
+button[class*="bg-red-"],
+button[class*="bg-emerald-"] {
+  color: #ffffff !important;
+}
+
+/* Reduce the oversized type scale used by the mockup-style pages. */
+.text-lg {
+  font-size: 0.9375rem !important;
+  line-height: 1.35rem !important;
+}
+
+.text-xl {
+  font-size: 1rem !important;
+  line-height: 1.45rem !important;
+}
+
+.text-2xl {
+  font-size: 1.125rem !important;
+  line-height: 1.6rem !important;
+}
+
+.text-3xl {
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important;
+}
+
+.text-4xl {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
+
+.text-5xl {
+  font-size: 1.75rem !important;
+  line-height: 2.25rem !important;
+}
+
+.rounded-xl,
+.rounded-2xl,
+.rounded-3xl {
+  border-radius: 0.5rem !important;
+}
+
+[class*="shadow"] {
+  box-shadow: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .text-gray-400,
+  .text-gray-500,
+  .text-gray-600,
+  .text-zinc-400,
+  .text-zinc-500,
+  .text-zinc-600,
+  .text-neutral-400,
+  .text-neutral-500,
+  .text-neutral-600 {
+    color: var(--app-text-muted) !important;
+  }
+
+  .text-gray-700,
+  .text-gray-800,
+  .text-gray-900,
+  .text-gray-950,
+  .text-zinc-700,
+  .text-zinc-800,
+  .text-zinc-900,
+  .text-neutral-700,
+  .text-neutral-800,
+  .text-neutral-900 {
+    color: var(--app-text) !important;
+  }
+}

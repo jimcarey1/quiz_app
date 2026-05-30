@@ -15,6 +15,7 @@ import {
   Plus,
   Library,
 } from "lucide-react"
+import { Button, Input } from "react-aria-components"
 
 const standards = [
   "Common Core State Standards",
@@ -57,10 +58,10 @@ export default function AdminPage() {
             <div className="h-3 rounded-full bg-zinc-200" />
           </div>
 
-          <button className="w-full rounded-lg bg-yellow-400 py-3 font-bold text-zinc-900">
+          <Button className="w-full rounded-lg bg-yellow-400 py-3 font-bold text-zinc-900">
             <Crown className="mr-2 inline" size={18} />
             Upgrade
-          </button>
+          </Button>
 
           <div className="flex items-center gap-3">
             <div className="grid size-12 place-items-center rounded-full bg-teal-700 text-white">
@@ -76,13 +77,14 @@ export default function AdminPage() {
 
       {/* Mobile Top Bar */}
       <header className="sticky top-0 z-40 flex items-center gap-3 border-b border-zinc-200 bg-white px-4 py-4 lg:hidden">
-        <button>
+        <Button aria-label="Open navigation menu">
           <Menu size={30} />
-        </button>
+        </Button>
 
         <div className="flex flex-1 items-center gap-3 rounded-xl bg-zinc-50 px-4 py-3 shadow-sm">
           <Search size={26} />
-          <input
+          <Input
+            aria-label="Search in Wayground library"
             placeholder="Search in Wayground library"
             className="w-full bg-transparent text-lg outline-none placeholder:text-zinc-400"
           />
@@ -99,9 +101,12 @@ export default function AdminPage() {
       <MobileBottomNav />
 
       {/* Floating Help Button */}
-      <button className="fixed bottom-8 right-8 hidden size-14 place-items-center rounded-full bg-fuchsia-700 text-white shadow-lg lg:grid">
+      <Button
+        aria-label="Help"
+        className="fixed bottom-8 right-8 hidden size-14 place-items-center rounded-full bg-fuchsia-700 text-white shadow-lg lg:grid"
+      >
         <HelpCircle size={30} />
-      </button>
+      </Button>
     </div>
   )
 }
@@ -116,7 +121,7 @@ function SidebarItem({
   active?: boolean
 }) {
   return (
-    <button
+    <Button
       className={[
         "flex w-full items-center gap-4 rounded-xl px-4 py-4 text-left text-lg font-medium",
         active
@@ -126,7 +131,7 @@ function SidebarItem({
     >
       {icon}
       <span>{label}</span>
-    </button>
+    </Button>
   )
 }
 
@@ -135,18 +140,18 @@ function HeroSection() {
     <section className="relative overflow-hidden">
       {/* Desktop Enter Code */}
       <div className="hidden justify-end px-10 pt-8 lg:flex">
-        <button className="flex items-center gap-2 font-bold">
+        <Button className="flex items-center gap-2 font-bold">
           <QrCode size={18} />
           Enter code
-        </button>
+        </Button>
       </div>
 
       {/* Mobile Enter Code */}
       <div className="flex justify-end px-6 pt-8 lg:hidden">
-        <button className="flex items-center gap-2 text-xl font-bold">
+        <Button className="flex items-center gap-2 text-xl font-bold">
           <QrCode size={24} />
           Enter code
-        </button>
+        </Button>
       </div>
 
       <div className="mx-auto max-w-5xl px-4 pt-8 text-center lg:pt-4">
@@ -198,7 +203,7 @@ function ActionCard({
   muted?: boolean
 }) {
   return (
-    <button
+    <Button
       className={[
         "relative flex h-32 w-48 shrink-0 flex-col items-center justify-center rounded-xl bg-white px-4 shadow-sm lg:w-60",
         active ? "z-10 scale-105" : "",
@@ -227,7 +232,7 @@ function ActionCard({
       {active && (
         <div className="absolute -bottom-5 size-8 rotate-45 bg-white" />
       )}
-    </button>
+    </Button>
   )
 }
 
@@ -238,15 +243,19 @@ function ResourceContent() {
       <div className="mx-auto flex max-w-3xl items-center gap-4">
         <div className="flex flex-1 items-center gap-4 rounded-3xl border border-zinc-300 px-6 py-4">
           <Search size={26} />
-          <input
+          <Input
+            aria-label="Search for any topic"
             placeholder="Search for any topic"
             className="w-full bg-transparent text-xl outline-none placeholder:text-zinc-400"
           />
         </div>
 
-        <button className="grid size-16 place-items-center rounded-2xl bg-fuchsia-700 text-white">
+        <Button
+          aria-label="Search"
+          className="grid size-16 place-items-center rounded-2xl bg-fuchsia-700 text-white"
+        >
           <Search size={30} />
-        </button>
+        </Button>
       </div>
 
       {/* Browse Text */}
@@ -274,13 +283,13 @@ function ResourceContent() {
         </h3>
 
         <div className="flex items-center gap-5">
-          <button className="flex items-center gap-2 text-xl font-bold underline">
+          <Button className="flex items-center gap-2 text-xl font-bold underline">
             See all <ArrowRight size={24} />
-          </button>
+          </Button>
 
-          <button className="rounded-md border border-yellow-300 bg-yellow-50 px-4 py-2 font-bold">
+          <Button className="rounded-md border border-yellow-300 bg-yellow-50 px-4 py-2 font-bold">
             ⚡ Early access
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -296,23 +305,23 @@ function ResourceContent() {
 
 function FilterButton({ label }: { label: string }) {
   return (
-    <button className="border-b-2 border-pink-500 px-4 pb-4 text-2xl font-bold">
+    <Button className="border-b-2 border-pink-500 px-4 pb-4 text-2xl font-bold">
       {label}
       <ChevronDown className="ml-2 inline" size={24} />
-    </button>
+    </Button>
   )
 }
 
 function StandardCard({ title }: { title: string }) {
   return (
-    <button className="relative min-h-36 overflow-hidden rounded-xl border border-zinc-200 bg-white p-5 text-left shadow-sm">
+    <Button className="relative min-h-36 overflow-hidden rounded-xl border border-zinc-200 bg-white p-5 text-left shadow-sm">
       <p className="relative z-10 text-lg font-bold leading-snug lg:text-xl">
         {title}
       </p>
 
       <div className="absolute bottom-0 right-0 h-16 w-28 rounded-tl-full bg-pink-100/70" />
       <div className="absolute bottom-2 right-2 h-10 w-12 rounded bg-blue-900" />
-    </button>
+    </Button>
   )
 }
 
@@ -339,7 +348,7 @@ function MobileNavItem({
   activeDot?: boolean
 }) {
   return (
-    <button
+    <Button
       className={[
         "flex flex-col items-center gap-1 text-sm font-semibold",
         active ? "text-fuchsia-900" : "text-zinc-500",
@@ -354,6 +363,6 @@ function MobileNavItem({
         {icon}
       </div>
       <span>{label}</span>
-    </button>
+    </Button>
   )
 }

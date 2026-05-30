@@ -15,6 +15,7 @@ import {
   Library,
   BarChart3,
 } from "lucide-react"
+import { Button, Input } from "react-aria-components"
 
 export default function SessionPage() {
   return (
@@ -33,9 +34,12 @@ export default function SessionPage() {
         </nav>
 
         <div className="mb-6 flex flex-col items-center gap-6">
-          <button className="grid size-11 place-items-center rounded-lg bg-yellow-400">
+          <Button
+            aria-label="Upgrade"
+            className="grid size-11 place-items-center rounded-lg bg-yellow-400"
+          >
             <Crown size={22} fill="black" />
-          </button>
+          </Button>
 
           <div className="grid size-14 place-items-center rounded-full bg-teal-700 text-white">
             :)
@@ -52,7 +56,8 @@ export default function SessionPage() {
 
             <div className="flex items-center gap-3 rounded-full border border-zinc-300 px-5 py-3 lg:w-[460px]">
               <Search size={22} />
-              <input
+              <Input
+                aria-label="Search by report name"
                 placeholder="Search by report name"
                 className="w-full bg-transparent text-base outline-none placeholder:text-zinc-400"
               />
@@ -73,11 +78,11 @@ export default function SessionPage() {
               <FilterButton label="Resource types" />
               <FilterButton label="All Reports" />
               <FilterButton label="All Classes" />
-              <button className="flex items-center gap-3 rounded-lg border border-zinc-300 px-5 py-3 text-base font-semibold">
+              <Button className="flex items-center gap-3 rounded-lg border border-zinc-300 px-5 py-3 text-base font-semibold">
                 <Calendar size={18} />
                 Filter by Date
                 <ChevronDown size={18} className="ml-10" />
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -91,7 +96,8 @@ export default function SessionPage() {
 
             <div className="mx-auto mt-10 flex max-w-5xl items-center gap-4 rounded-full border border-zinc-300 px-6 py-4 text-left">
               <Search size={24} />
-              <input
+              <Input
+                aria-label="Search activities"
                 placeholder="Search from millions of teacher created activities..."
                 className="w-full bg-transparent text-lg outline-none placeholder:text-zinc-400"
               />
@@ -110,9 +116,12 @@ export default function SessionPage() {
       </main>
 
       {/* Desktop Help Button */}
-      <button className="fixed bottom-8 right-8 hidden size-14 place-items-center rounded-full bg-fuchsia-700 text-3xl font-bold text-white shadow-lg lg:grid">
+      <Button
+        aria-label="Help"
+        className="fixed bottom-8 right-8 hidden size-14 place-items-center rounded-full bg-fuchsia-700 text-3xl font-bold text-white shadow-lg lg:grid"
+      >
         ?
-      </button>
+      </Button>
 
       {/* Mobile Bottom Navbar */}
       <MobileBottomNav />
@@ -130,7 +139,7 @@ function RailItem({
   active?: boolean
 }) {
   return (
-    <button className="flex flex-col items-center gap-2 text-sm">
+    <Button className="flex flex-col items-center gap-2 text-sm">
       <div
         className={[
           "grid size-14 place-items-center rounded-2xl",
@@ -150,7 +159,7 @@ function RailItem({
       >
         {label}
       </span>
-    </button>
+    </Button>
   )
 }
 
@@ -162,7 +171,7 @@ function ReportTab({
   active?: boolean
 }) {
   return (
-    <button
+    <Button
       className={[
         "rounded-full px-5 py-3 text-lg font-bold",
         active
@@ -171,16 +180,16 @@ function ReportTab({
       ].join(" ")}
     >
       {label}
-    </button>
+    </Button>
   )
 }
 
 function FilterButton({ label }: { label: string }) {
   return (
-    <button className="flex items-center gap-3 rounded-lg border border-zinc-300 px-5 py-3 text-base font-semibold">
+    <Button className="flex items-center gap-3 rounded-lg border border-zinc-300 px-5 py-3 text-base font-semibold">
       {label}
       <ChevronDown size={18} />
-    </button>
+    </Button>
   )
 }
 
@@ -244,7 +253,7 @@ function CreateOption({
   className?: string
 }) {
   return (
-    <button
+    <Button
       className={[
         "flex min-h-20 items-center gap-4 rounded-md border border-zinc-300 bg-white px-5 py-4 hover:bg-zinc-50",
         className,
@@ -263,7 +272,7 @@ function CreateOption({
         <p className="text-sm font-medium text-zinc-500">{eyebrow}</p>
         <p className="text-lg font-bold text-zinc-900">{title}</p>
       </div>
-    </button>
+    </Button>
   )
 }
 
@@ -290,7 +299,7 @@ function MobileNavItem({
   activeDot?: boolean
 }) {
   return (
-    <button
+    <Button
       className={[
         "flex flex-col items-center gap-1 text-sm font-semibold",
         active ? "text-fuchsia-900" : "text-zinc-500",
@@ -305,6 +314,6 @@ function MobileNavItem({
         {icon}
       </div>
       <span>{label}</span>
-    </button>
+    </Button>
   )
 }

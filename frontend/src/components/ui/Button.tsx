@@ -13,10 +13,10 @@ let button = tv({
   base: 'relative inline-flex items-center justify-center gap-2 border border-transparent dark:border-white/10 h-9 box-border px-3.5 py-0 [&:has(>svg:only-child)]:px-0 [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:w-8 font-sans text-sm text-center transition rounded-lg cursor-default [-webkit-tap-highlight-color:transparent]',
   variants: {
     variant: {
-      primary: 'bg-blue-600 hover:bg-blue-700 pressed:bg-blue-800 text-white',
-      secondary: 'border-black/10 bg-neutral-50 hover:bg-neutral-100 pressed:bg-neutral-200 text-neutral-800 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:pressed:bg-neutral-500 dark:text-neutral-100',
-      destructive: 'bg-red-700 hover:bg-red-800 pressed:bg-red-900 text-white',
-      quiet: 'border-0 bg-transparent hover:bg-neutral-200 pressed:bg-neutral-300 text-neutral-800 dark:hover:bg-neutral-700 dark:pressed:bg-neutral-600 dark:text-neutral-100'
+      primary: 'bg-green-600 hover:bg-green-700 pressed:bg-green-800 text-white',
+      secondary: 'border-green-600 bg-white hover:bg-green-50 pressed:bg-green-100 text-green-700 dark:bg-black dark:hover:bg-green-950 dark:pressed:bg-green-900 dark:text-green-300',
+      destructive: 'bg-green-700 hover:bg-green-800 pressed:bg-green-900 text-white',
+      quiet: 'border-0 bg-transparent hover:bg-green-50 pressed:bg-green-100 text-green-700 dark:hover:bg-green-950 dark:pressed:bg-green-900 dark:text-green-300'
     },
     isDisabled: {
       true: 'border-transparent dark:border-transparent bg-neutral-100 dark:bg-neutral-800 text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]'
